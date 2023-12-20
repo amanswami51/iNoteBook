@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import Addnote from './addnote';
 import Noteitem from './Noteitem';
-import { noteContext } from '../context/notes/NoteState';
+import { noteContext } from '../context/NoteState';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 function Note(props){
 
@@ -46,7 +47,7 @@ function Note(props){
     useEffect(()=>{
         fetchCollectionName();
         if(!localStorage.getItem('token')){
-            navigate('/')
+            navigate('/login')
         }
         // eslint-disable-next-line
     },[])
@@ -66,7 +67,7 @@ function Note(props){
     const handleSaveChanges = (e)=>{
         refClose.current.click();
         updateNote(etext.id, etext.etitle, etext.edescription, etext.etag, name)
-        props.showAlert("Updated successfully", "success");
+        toast.success("Updated successfully")
     }
 
     //use to get value from input fields
@@ -123,7 +124,7 @@ function Note(props){
             <h1 className='mx-2' onClick={handleAddcollectionIcon} style={{border:"4px solid black", borderRadius:"17px", marginBottom:"0px", width:"50px", cursor:"pointer"}}>+</h1>
         </div>
 
-        <Addnote showAlert={props.showAlert} name={name}/>
+        <Addnote name={name}/>
 
         {/* Your Notes */}
         <h1 className='mt-5'>Select Collection For Your Notes</h1>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import {auth} from './firebase';
 import { Link, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 const provider = new GoogleAuthProvider();
 
 
@@ -20,12 +21,12 @@ export default function Login(props) {
             const user = result.user;
             localStorage.setItem('token', user.accessToken);
             localStorage.setItem('uid', user.uid)
-            navigate('/yournotes');
+            navigate('/');
         })
         .catch((error) => {
             // eslint-disable-next-line
             const errorMessage = error.message;
-            props.showAlert("Please login with correct crendentials", "danger")
+            toast.success("Please login with correct crendentials")
         });
         setText({email:"", password:""});
     }
@@ -35,7 +36,7 @@ export default function Login(props) {
             const user = result.user;
             localStorage.setItem('token', user.accessToken);
             localStorage.setItem('uid', user.uid);
-            navigate('/yournotes');
+            navigate('/');
         }).catch((error) => {
              // eslint-disable-next-line
             const credential = GoogleAuthProvider.credentialFromError(error);

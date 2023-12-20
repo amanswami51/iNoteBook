@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
-import { noteContext } from '../context/notes/NoteState';
+import { noteContext } from '../context/NoteState';
+import toast from 'react-hot-toast';
 
 
 export default function Addnote(props) {
@@ -23,15 +24,14 @@ export default function Addnote(props) {
             alert("Please select Desire Collection Name")
         }
         else{
-
             const {title, description, tag} = text;
             addNote(title, description, tag, props.name, uploadFile);
     
             setText({title:"", description:"", tag:""})
-            props.showAlert('A new note add successfully', 'success')
+            toast.success('A new note add successfully')
         }
     }
-
+  
   return (
     <>
         <h1 className='my-3'>Before Adding New Note, Please Select Desire Collection.</h1>
@@ -42,7 +42,6 @@ export default function Addnote(props) {
             </div>
             <div className="mb-3">
                 <label htmlFor="exampleInputPassword1" className="form-label">Description</label>
-                {/* <input type="text" value={text.description} name='description' onChange={handleOnChange} className="form-control" id="exampleInputPassword1" /> */}
                 <textarea value={text.description} name='description' onChange={handleOnChange} className="form-control" id="exampleInputPassword1" rows={8}/>
             </div>
             <div className="mb-3">
@@ -58,41 +57,3 @@ export default function Addnote(props) {
     </>
   )
 }
-
-
-/*
-
-    //Real time database
-    import {ref, set, child, get } from 'firebase/database';
-    import {dbReal} from './firebase';
-    const dbRef = ref(dbReal);
-
-    //Add note
-    const handleAddnote = (e)=>{
-        e.preventDefault();
-        const {title, description, tag} = text;
-        const userid = title;
-        set(ref(dbReal, "users/" + userid), {
-            title:title,
-            description:description,
-            tag:tag,
-        })
-        setText({title:"", description:"", tag:""})
-    }
-
-    //Get note
-    const handleGetnote = (e)=>{
-        e.preventDefault();
-        const userId = "Govind";
-        get(child(dbRef, `users/${userId}`)).then((snapshot) => {
-        if (snapshot.exists()) {
-            console.log(snapshot.val());
-        } else {
-            console.log("No data available");
-        }
-        }).catch((error) => {
-        console.error(error);
-        });
-    }
-    
-*/

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { noteContext } from '../context/notes/NoteState'
+import { noteContext } from '../context/NoteState'
 
 function ForgetPassword() {
     const [text, setText] = useState("")

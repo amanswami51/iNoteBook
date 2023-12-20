@@ -1,8 +1,9 @@
 import React, {createContext, useState} from 'react';
-import {dbFirestore, auth, storage} from '../../components/firebase'; // eslint-disable-next-line
+import {dbFirestore, auth, storage} from '../components/firebase'; // eslint-disable-next-line
 import { collection, addDoc, getDocs, doc, deleteDoc, updateDoc, setDoc, getDoc } from "firebase/firestore"; 
 import {sendPasswordResetEmail } from 'firebase/auth';
 import { uploadBytes, ref, getDownloadURL } from 'firebase/storage';
+import toast from 'react-hot-toast';
 const noteContext = createContext();
 
 
@@ -53,6 +54,7 @@ const NoteState = (props) =>{
         await deleteDoc(doc(dbFirestore, `${localStorage.getItem('uid')}/${collName}/notes`, x.id));
       })
       setNotes([])
+      toast.success(`${collName} collection deleted successfully`)
     } 
 
     // ***********************************************************
@@ -71,10 +73,19 @@ const NoteState = (props) =>{
                 getNote(collName);
             }
             else{
+              //update UI notes, to remove waiting time of client
+              setNotes(notes.concat({
+                title: title,
+                description: description,
+                tag: tag,
+              }))
+
+              //upload images on storage and then get imageUrl.
               const imageRef = ref(storage, `images/${title}`)
               const response = await uploadBytes(imageRef, UploadFile);// eslint-disable-next-line
               const resDown = await getDownloadURL(response.ref);
-             
+              
+              //Add note on firestore with imageUrl.
               // eslint-disable-next-line
               const docRef = await addDoc(collection(dbFirestore, `${localStorage.getItem('uid')}/${collName}/notes`), {
                 title: title,

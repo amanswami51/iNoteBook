@@ -38,10 +38,6 @@ export default function Navbar(props) {
           <li className="nav-item">
             <Link className={`nav-link ${location.pathname==='/about'?"active":""}`} to="/about">About</Link>
           </li>
-          {localStorage.getItem('token')?
-          <li className="nav-item">
-            <Link className="nav-link" to="/yournotes">YourNotes</Link>
-          </li>:""}
         </ul>
         <div className={`form-check form-switch text-${props.mode==='light'?'dark':'light'}`}>
           <input className="form-check-input" type="checkbox" onClick={props.toggleMode} role="switch" id="flexSwitchCheckDefault" />

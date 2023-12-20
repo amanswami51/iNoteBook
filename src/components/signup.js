@@ -2,7 +2,8 @@ import React, { useContext, useState } from 'react';
 import {createUserWithEmailAndPassword } from "firebase/auth";
 import {auth} from './firebase';
 import { useNavigate } from 'react-router-dom';
-import { noteContext } from '../context/notes/NoteState';
+import { noteContext } from '../context/NoteState';
+import toast from 'react-hot-toast';
 
 export default function Signup(props) {
     const c = useContext(noteContext);
@@ -23,10 +24,10 @@ export default function Signup(props) {
             const user = userCredential.user;
             localStorage.setItem('token', user.accessToken)
             localStorage.setItem('uid', user.uid)
-            navigate('/yournotes');
+            navigate('/');
             getNote(null);
         }).catch((error) => {
-            props.showAlert("something went to be wrong", "danger")
+            toast.success("something went to be wrong")
         });
         setText({email:"", password:""})
     }

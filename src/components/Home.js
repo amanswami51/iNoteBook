@@ -1,10 +1,10 @@
 import React from 'react';
-import Superhero from '../services/Superhero';
+import Note from './Note';
 
 function Home(props) {
   return (
     <div className='my-3'>
-      <Superhero showAlert={props.showAlert}/>
+       <Note showAlert={props.showAlert}/>
     </div>
   )
 }

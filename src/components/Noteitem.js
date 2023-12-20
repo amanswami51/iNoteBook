@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
-import { noteContext } from '../context/notes/NoteState';
+import { noteContext } from '../context/NoteState';
 import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 function Noteitem(props){
   
@@ -11,6 +12,7 @@ function Noteitem(props){
   //call the deleteNote function which is created in NoteState
   const handleDelete = async(name, id)=>{
     deleteNote(name, id)
+    toast.success("Note Delete Successfully");
   }
 
   //call the readMoreNote fuction which is create in NoteState
