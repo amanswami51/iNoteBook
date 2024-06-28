@@ -13,7 +13,7 @@ export default function About() {
                 </h2>
                 <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                     <div className="accordion-body">
-                        <strong>Aman swami,</strong> web developer -- React js, firebase, express js, mongoDb. <br />
+                        <strong>Aman swami,</strong> web developer -- React js, Express js, MongoDB, Node js, Firebase, SCSS. <br />
                         I am pursuing B.Tech in computer science and engineering branch from "I.K. Gujral Punjab Technical university amritsar campus". <br /> 
                         I completed my 12th from "Swami vivekanand Govt. model school block suratgarh, Rajasthan". <br />
                     </div>
